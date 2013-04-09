@@ -45,15 +45,6 @@
 	</listener>
 
 
-	<filter>
-		<filter-name>filterChainProxy</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>filterChainProxy</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
 
 	<!-- Vaadin -->
 	<context-param>
@@ -63,7 +54,7 @@
 	</context-param>
 
 	<servlet>
-		<servlet-name>ReporterServlet</servlet-name>
+		<servlet-name>VaadinServlet</servlet-name>
 		<servlet-class>com.vaadin.server.VaadinServlet</servlet-class>
 		<init-param>
 			<description>Vaadin UI</description>
@@ -73,7 +64,7 @@
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>ReporterServlet</servlet-name>
+		<servlet-name>VaadinServlet</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 
