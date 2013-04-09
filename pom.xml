@@ -79,6 +79,7 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -137,11 +138,6 @@
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
 			<version>${spring-security.version}</version>
@@ -178,10 +174,19 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
+
+		<!-- Test deps -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- tomcat -> tests -->
@@ -189,36 +194,43 @@
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-catalina</artifactId>
 			<version>${tomcat.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-coyote</artifactId>
 			<version>${tomcat.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-dbcp</artifactId>
 			<version>${tomcat.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-el-api</artifactId>
 			<version>${tomcat.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-jasper-el</artifactId>
 			<version>${tomcat.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-jasper</artifactId>
 			<version>${tomcat.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-jsp-api</artifactId>
 			<version>${tomcat.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -233,30 +245,32 @@
 					<path>/vasap</path>
 					<warSourceDirectory>src/main/webapp</warSourceDirectory>
 				</configuration>
+				<!--
 				<executions>
 					<execution>
 						<id>tomcat-run</id>
+						<phase>pre-integration-test</phase>
 						<goals>
 							<goal>run</goal>
 						</goals>
-						<phase>pre-integration-test</phase>
 						<configuration>
 							<fork>true</fork>
 						</configuration>
 					</execution>
 					<execution>
 						<id>tomcat-shutdown</id>
+						<phase>post-integration-test</phase>
 						<goals>
 							<goal>shutdown</goal>
 						</goals>
-						<phase>post-integration-test</phase>
 					</execution>
 				</executions>
+				-->
 				<dependencies>
 					<dependency>
 						<groupId>javax.servlet</groupId>
 						<artifactId>javax.servlet-api</artifactId>
-						<version>3.0.1</version>
+						<version>3.1-b08</version>
 					</dependency>
 				</dependencies>
 			</plugin>
