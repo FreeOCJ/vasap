@@ -19,6 +19,12 @@ public class DossierCreateView extends BasePanelView {
 	}
 
 	@Override
+	public boolean isAllowed() {
+		// Logged in?
+		return UserSecurity.getPrincipal() != null;
+	}
+
+	@Override
 	protected void doNavigateTo(String fragmentParameters) {
 
 		final TextField nom = new TextField();
@@ -38,7 +44,7 @@ public class DossierCreateView extends BasePanelView {
 		create.addClickListener(new Button.ClickListener() {
 			@Override
 			public void buttonClick(Button.ClickEvent clickEvent) {
-				getDossierDao().create(UserSecurity.getPrincipal(), nom.getValue(), prenom.getValue(), "", "", 1134, localite.getValue());
+				//getDossierDao().create(UserSecurity.getPrincipal(), nom.getValue(), prenom.getValue(), "", "", 1134, localite.getValue());
 				Notification.show("Dossier créé.");
 
 				getNavigator().navigateTo(DossierListView.NAME);

@@ -16,4 +16,7 @@
 		<entry key="hibernate.dialect" value-ref="hibernateDialect" />
 	</util:map>
 
+	<bean id="emptyDbInitializator" class="ch.jesc.vasap.web.db.EmptyDbInitializator">
+
+	</bean>
 </beans>

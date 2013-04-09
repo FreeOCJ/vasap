@@ -14,11 +14,6 @@ public abstract class BaseView extends CustomComponent implements WebView {
 	}
 
 	@Override
-	public boolean isAllowed() {
-		return true;
-	}
-
-	@Override
 	public final void enter(ViewChangeListener.ViewChangeEvent event) {
 		String str = "Navigate to " + getClass().getSimpleName();
 		String fragment = event.getParameters();

@@ -34,15 +34,27 @@ public class PageBorder extends AbsoluteLayout implements ViewDisplay {
 		// Header
 		{
 			final HorizontalLayout header = new HorizontalLayout();
-			fullLayout.addComponent(header, "top:5px; left:5px; right: 5px; height: 60px;");
+			fullLayout.addComponent(header, "top:5px; left:5px; right: 5px; height: 800px;");
 			header.addStyleName("header-layout");
+			header.setMargin(true);
+
 			// Title
 			{
-				final Label title = new Label("CareNet");
+				final Label title = new Label("VaSAp - Vaadin Sample Application");
 				header.addComponent(title);
 				header.setExpandRatio(title, 10.0f);
 				header.setComponentAlignment(title, Alignment.MIDDLE_LEFT);
 				title.setStyleName("title-label");
+			}
+
+			// Espcement
+			{
+				final Label title = new Label();
+				header.addComponent(title);
+				header.setExpandRatio(title, 5.0f);
+				header.setComponentAlignment(title, Alignment.MIDDLE_CENTER);
+				//title.setStyleName("title-label");
+				title.setSizeUndefined();
 			}
 
 			// Login
@@ -66,11 +78,12 @@ public class PageBorder extends AbsoluteLayout implements ViewDisplay {
 						UI.getCurrent().getNavigator().navigateTo(LoginView.NAME);
 					}
 				});
-			} else {
+			}
+			else {
 				final Button login = new Button("Login");
 				header.addComponent(login);
 				header.setComponentAlignment(login, Alignment.MIDDLE_RIGHT);
-				header.setExpandRatio(login, 1.0f);
+				header.setExpandRatio(login, 10.0f);
 				login.addStyleName("login-label");
 				login.addStyleName(Reindeer.BUTTON_LINK);
 				login.addClickListener(new Button.ClickListener() {
@@ -144,7 +157,7 @@ public class PageBorder extends AbsoluteLayout implements ViewDisplay {
 		viewComponent.setSizeFull();
 		viewComponent.setStyleName("body-view");
 
-		Page.getCurrent().setTitle("CareNet - " + webView.getTitle());
+		Page.getCurrent().setTitle("VaSAp - " + webView.getTitle());
 	}
 
 	private void addLeftMenus(VerticalLayout menuLayout) {
@@ -153,7 +166,7 @@ public class PageBorder extends AbsoluteLayout implements ViewDisplay {
 		{
 			final MenuBar menuBar = new MenuBar();
 			menuBar.setSizeFull();
-			menuBar.addItem("Mes dossiers", new MenuBar.Command() {
+			menuBar.addItem("Dossiers", new MenuBar.Command() {
 				@Override
 				public void menuSelected(MenuBar.MenuItem selectedItem) {
 					UI.getCurrent().getNavigator().navigateTo(DossierListView.NAME);

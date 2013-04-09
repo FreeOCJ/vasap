@@ -1,7 +1,12 @@
 package ch.jesc.vasap.web.ui.view.login;
 
+import ch.jesc.vasap.core.dao.UserDAO;
+import ch.jesc.vasap.core.model.User;
+import ch.jesc.vasap.security.UserSecurity;
 import ch.jesc.vasap.web.ui.common.BasePanelView;
+import ch.jesc.vasap.web.utils.SpringHelper;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
@@ -22,12 +27,23 @@ public class LoginView extends BasePanelView {
 		password = new TextField();
 		layout.addComponent(password);
 
-		Button login = new Button();
+		Button login = new Button("Login");
 		layout.addComponent(login);
 		login.addClickListener(new Button.ClickListener() {
 			@Override
 			public void buttonClick(Button.ClickEvent clickEvent) {
-				toString();
+				User u = getUserDao().getByEmail(username.getValue());
+				if (u != null) {
+					if (UserSecurity.login(u, password.getValue())) {
+						Notification.show("Login succesful", Notification.Type.HUMANIZED_MESSAGE);
+					}
+					else {
+						Notification.show("Wrong password", Notification.Type.ERROR_MESSAGE);
+					}
+				}
+				else {
+					Notification.show("User '"+username.getValue()+"' not found", Notification.Type.ERROR_MESSAGE);
+				}
 			}
 		});
 	}
@@ -38,7 +54,17 @@ public class LoginView extends BasePanelView {
 	}
 
 	@Override
+	public boolean isAllowed() {
+		return true;
+	}
+
+	@Override
 	protected void doNavigateTo(String fragmentParameters) {
+	}
+
+	private UserDAO getUserDao() {
+		final UserDAO dao = SpringHelper.getBean(UserDAO.class);
+		return dao;
 	}
 
 }

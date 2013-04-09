@@ -13,6 +13,11 @@ public class AccessDeniedView extends BasePanelView {
 	}
 
 	@Override
+	public boolean isAllowed() {
+		return true;
+	}
+
+	@Override
 	protected void doNavigateTo(String fragmentParameters) {
 		layout.addComponent(new Label("Access denied"));
 	}

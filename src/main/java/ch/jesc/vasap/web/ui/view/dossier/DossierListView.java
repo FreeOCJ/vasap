@@ -19,6 +19,11 @@ public class DossierListView extends BasePanelView {
 		return "Mes dossiers";
 	}
 
+	@Override
+	public boolean isAllowed() {
+		return true;
+	}
+
 	public void doNavigateTo(String fragmentParameters) {
 
 		Button create = new Button("Créer un dossier");

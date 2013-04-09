@@ -15,7 +15,25 @@ public class Dossier extends BaseEntity {
 
 	private User owner;
 	private Date from;
+	private String customer;
+	private String description;
 
+
+	@Column(name = "CUSTOMER", nullable = false)
+	public String getCustomer() {
+		return customer;
+	}
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+
+	@Column(name = "DESCR", nullable = false)
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	@ManyToOne
 	@JoinColumn(name = "OWNER_FK", nullable = false, unique = false)

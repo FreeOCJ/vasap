@@ -1,0 +1,113 @@
+@import "../chameleon/chameleon.scss";
+
+@mixin vasap {
+	@include chameleon;
+
+	div {
+		font-size: 16px;
+	}
+
+
+	.login-label {
+		font-size: 20px;
+		font-color: orange;
+		margin: 5px;
+	}
+	.title-label {
+		font-size: 30px;
+		font-family: Georgia;
+		color: #339933;
+		text-align: left;
+		padding-top: 30px;
+		padding-left: 100px;
+	}
+
+	.header-layout {
+		background-color: #CCFFCC;
+		width: 100%;
+	}
+
+	.left-menu {
+		vertical-align: top;
+		//background-color: rgba(3, 255, 164, 0.20);
+	}
+
+	.middle-layout {
+		vertical-align: top;
+		background-color: #CCFFCC;
+	}
+
+	.body-layout {
+		padding: 2px;
+		//margin: 5px;
+		border: 1px solid orange;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		border-radius: 10px;
+	}
+
+	.body-view {
+		border: none;
+		//border-color: white;
+	}
+
+
+	.v-panel-content-body-view {
+		border: none;
+		//border-color: white;
+	}
+
+	.v-panel-nocaption-body-view {
+		border: none;
+		//border-color: white;
+	}
+
+	.v-gecko .v-panel-deco {
+		border: none;
+		border-top-color: white;
+		background: none;
+	}
+
+	.v-webkit .v-panel-deco {
+		border: none;
+		border-top-color: white;
+		background: none;
+	}
+
+
+	.v-ie9 .v-panel-deco {
+		border: none;
+		border-top-color: white;
+		background: none;
+	}
+
+	.footer-layout {
+		background-color: #D9FAF7;
+	}
+
+	.view-title {
+		font-size: 20px;
+		//font-color: orange;
+	}
+
+	.rented-device {
+		border: 1px solid;
+		border-color: orange;
+		padding: 10px;
+		margin: 10px;
+	}
+
+	.v-menubar {
+		border: 1px solid;
+		background: none;
+		background-color: white;
+		color: orange;
+	}
+
+	.dossier-block {
+		border: 1px solid;
+		background-color: blue;
+
+	}
+
+}

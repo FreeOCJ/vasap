@@ -17,18 +17,15 @@ public class DossierDAO extends GenericDAO<Dossier> {
 		super(Dossier.class);
 	}
 
-	public Dossier create(String email, String nom, String prenom, String rue, String numero, Integer npa, String localite) {
+	public Dossier create(Long uid, String customer, String country, String description) {
 
-		User user = userDao.getByEmail(email);
-		if (user == null) {
-			user = userDao.create("sara.cuendet@gmail.com", "welcome", "Cuendet", "Sara", false, true);
-		}
-
+		User user = userDao.getById(uid);
 		if (user != null) {
-
 			final Dossier d = new Dossier();
 			d.setOwner(user);
 			d.setFrom(new Date());
+			d.setDescription(description);
+			d.setCustomer(customer);
 			template.save(d);
 			return d;
 		}
