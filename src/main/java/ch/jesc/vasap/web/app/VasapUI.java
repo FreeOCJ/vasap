@@ -11,7 +11,7 @@ import com.vaadin.navigator.ViewDisplay;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
 
-@Theme("carenet")
+@Theme("vasap")
 public class VasapUI extends UI {
 
 	public VasapUI() {

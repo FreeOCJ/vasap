@@ -8,7 +8,7 @@
 	<!-- log4j -->
 	<context-param>
 		<param-name>log4jConfigLocation</param-name>
-		<param-value>file:${appDir}/log4j.xml</param-value>
+		<param-value>file:src/main/webapp/WEB-INF/log4j.xml</param-value>
 	</context-param>
 	<context-param>
 		<param-name>log4jExposeWebAppRoot</param-name>
@@ -34,10 +34,8 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath:spring-core-hibernate.xml,
-			classpath:spring-core-dao.xml,
 			classpath:spring-core-database.xml,
 			classpath:spring-core-services.xml,
-			classpath:spring-web-common.xml,
 			classpath:spring-web-database.xml,
 			/WEB-INF/spring-vasap-ui.xml
 		</param-value>

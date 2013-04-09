@@ -17,10 +17,10 @@
 	</bean>
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="${extprop.prod.jdbc.url}" />
-		<property name="username" value="${extprop.prod.jdbc.username}" />
-		<property name="password" value="${extprop.prod.jdbc.password}" />
+		<property name="driverClassName" value="org.h2.Driver" />
+		<property name="url" value="jdbc:h2:target/database" />
+		<property name="username" value="sa" />
+		<property name="password" value="" />
 		<property name="initialSize" value="1" />
 		<property name="maxActive" value="20" />
 	</bean>

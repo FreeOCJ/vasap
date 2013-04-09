@@ -16,28 +16,18 @@
 	</bean>
 
 	<util:list id="dbEntities">
-		<value>ch.jesc.carenet.core.model.Customer</value>
 		<value>ch.jesc.vasap.core.model.Dossier</value>
-		<value>ch.jesc.carenet.core.model.User</value>
+		<value>ch.jesc.vasap.core.model.User</value>
 	</util:list>
 
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
-
 		<property name="annotatedClasses" ref="dbEntities"/>
-		<property name="hibernateProperties">
-			<bean class="net.ecozig.core.utils.MapAggregator">
-				<property name="maps">
-					<list>
-						<ref bean="baseHibernateProperties" />
-						<ref bean="specHibernateProperties" />
-					</list>
-				</property>
-			</bean>
-		</property>
+		<property name="hibernateProperties" ref="baseHibernateProperties" />
 	</bean>
 
 	<util:map id="baseHibernateProperties">
+		<entry key="hibernate.hbm2ddl.auto" value="create"/>
 		<entry key="hibernate.show_sql" value="false"/>
 		<entry key="hibernate.connection.autocommit" value="false"/>
 		<entry key="hibernate.jdbc.batch_size" value="0"/>
@@ -46,10 +36,10 @@
 	</util:map>
 
 	<bean id="hibernateDialect" class="java.lang.String">
-		<constructor-arg value="org.hibernate.dialect.PostgreSQLDialect"/>
+		<constructor-arg value="org.hibernate.dialect.H2Dialect"/>
 	</bean>
 
 	<bean id="userDao" class="ch.jesc.vasap.core.dao.UserDAO" />
-	<bean id="dossierDao" class="ch.jesc.carenet.core.dao.DossierDAO" />
+	<bean id="dossierDao" class="ch.jesc.vasap.core.dao.DossierDAO" />
 
 </beans>
