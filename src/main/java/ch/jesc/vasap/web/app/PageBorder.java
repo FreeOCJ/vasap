@@ -2,6 +2,7 @@ package ch.jesc.vasap.web.app;
 
 import ch.jesc.vasap.security.UserSecurity;
 import ch.jesc.vasap.web.ui.common.WebView;
+import ch.jesc.vasap.web.ui.view.dossier.DossierCreateView;
 import ch.jesc.vasap.web.ui.view.dossier.DossierListView;
 import ch.jesc.vasap.web.ui.view.login.LoginView;
 import ch.jesc.vasap.web.utils.RequestHelper;
@@ -101,7 +102,30 @@ public class PageBorder extends AbsoluteLayout implements ViewDisplay {
 			fullLayout.addComponent(menuLayout, "top:100px; left:5px; right:5px; height: 30px;");
 			menuLayout.setStyleName("top-menu-layout");
 
-			menuLayout.addComponent(new Label("Menu 1"));
+			{
+				final MenuBar menuBar = new MenuBar();
+				menuLayout.addComponent(menuBar);
+				//menuBar.setSizeFull();
+				menuBar.addItem("List", new MenuBar.Command() {
+					@Override
+					public void menuSelected(MenuBar.MenuItem selectedItem) {
+						UI.getCurrent().getNavigator().navigateTo(DossierListView.NAME);
+					}
+				});
+				menuLayout.addComponent(menuBar);
+			}
+			{
+				final MenuBar menuBar = new MenuBar();
+				menuLayout.addComponent(menuBar);
+				//menuBar.setSizeFull();
+				menuBar.addItem("Create", new MenuBar.Command() {
+					@Override
+					public void menuSelected(MenuBar.MenuItem selectedItem) {
+						UI.getCurrent().getNavigator().navigateTo(DossierCreateView.NAME);
+					}
+				});
+				menuLayout.addComponent(menuBar);
+			}
 		}
 
 		// Partie centrale
@@ -160,20 +184,5 @@ public class PageBorder extends AbsoluteLayout implements ViewDisplay {
 		Page.getCurrent().setTitle("VaSAp - " + webView.getTitle());
 	}
 
-	private void addLeftMenus(VerticalLayout menuLayout) {
-
-		// Home
-		{
-			final MenuBar menuBar = new MenuBar();
-			menuBar.setSizeFull();
-			menuBar.addItem("Dossiers", new MenuBar.Command() {
-				@Override
-				public void menuSelected(MenuBar.MenuItem selectedItem) {
-					UI.getCurrent().getNavigator().navigateTo(DossierListView.NAME);
-				}
-			});
-			menuLayout.addComponent(menuBar);
-		}
-	}
 
 }

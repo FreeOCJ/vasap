@@ -7,6 +7,7 @@ import ch.jesc.vasap.web.ui.view.dossier.DossierListView;
 import ch.jesc.vasap.web.ui.view.login.LoginView;
 import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.Navigator;
+import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.navigator.ViewDisplay;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
@@ -26,17 +27,17 @@ public class VasapUI extends UI {
 		// Create Navigator, make it control the ViewDisplay
 		Navigator navigator = new Navigator(UI.getCurrent(), (ViewDisplay)display);
 		setNavigator(navigator);
-//		navigator.addViewChangeListener(new ViewChangeListener() {
-//			@Override
-//			public boolean beforeViewChange(ViewChangeEvent event) {
-//				return ((WebView)event.getNewView()).isAllowed();
-//			}
-//
-//			@Override
-//			public void afterViewChange(ViewChangeEvent event) {
-//				toString();
-//			}
-//		});
+		navigator.addViewChangeListener(new ViewChangeListener() {
+			@Override
+			public boolean beforeViewChange(ViewChangeEvent event) {
+				return ((WebView)event.getNewView()).isAllowed();
+			}
+
+			@Override
+			public void afterViewChange(ViewChangeEvent event) {
+				toString();
+			}
+		});
 
 		addViews(navigator);
 

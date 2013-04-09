@@ -40,8 +40,8 @@ public class EmptyDbInitializator implements InitializingBean {
 	private void createDossiers() {
 		int nb = dossierDAO.getAll().size();
 		if (nb == 0) {
-			dossierDAO.create(user1.getId(), "Nestlé", "Suisse", "Contract to become a client");
-			dossierDAO.create(user1.getId(), "Alstom", "Suisse", "Graduating java developers to Vaadin");
+			dossierDAO.create(user1.getId(), "Nestlé", "Switzerland", "Contract to become a client");
+			dossierDAO.create(user1.getId(), "Ericson", "Sweden", "Graduating java developers to Vaadin");
 			dossierDAO.create(user1.getId(), "France Telecom", "France", "They need a Vaadin specialist ASAP");
 			dossierDAO.create(user1.getId(), "NASA", "USA", "Spreading the word about Java on Mars");
 
@@ -64,6 +64,8 @@ public class EmptyDbInitializator implements InitializingBean {
 			log.info("Users created");
 		}
 		else {
+			user1 = userDao.getByEmail("admin@master.com");
+			user2 = userDao.getByEmail("bla@bli.com");
 			log.debug("Already "+nb+" users in DB");
 		}
 	}

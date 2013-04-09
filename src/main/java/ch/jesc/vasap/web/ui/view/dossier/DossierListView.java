@@ -6,6 +6,7 @@ import ch.jesc.vasap.security.UserSecurity;
 import ch.jesc.vasap.web.ui.common.BasePanelView;
 import ch.jesc.vasap.web.utils.SpringHelper;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
 import java.util.List;
@@ -40,6 +41,9 @@ public class DossierListView extends BasePanelView {
 			VerticalLayout block = new VerticalLayout();
 			layout.addComponent(block);
 			block.setStyleName("dossier-block");
+			block.addComponent(new Label(d.getFrom().toString()));
+			block.addComponent(new Label(d.getCustomer()));
+			block.addComponent(new Label(d.getDescription()));
 		}
 	}
 
