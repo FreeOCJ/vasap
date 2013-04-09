@@ -1,19 +1,16 @@
-package ch.jesc.vasap.common;
+package ch.jesc.vasap.web.ui.common;
 
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.UI;
-import net.ecozig.web.application.PanelView;
-import net.ecozig.web.application.WebView;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-public abstract class RepoBaseView extends CustomComponent implements WebView {
+public abstract class BaseView extends CustomComponent implements WebView {
 
-	private static Logger log = Logger.getLogger(PanelView.class);
+	private static Logger log = Logger.getLogger(BaseView.class);
 
-	protected RepoBaseView() {
+	protected BaseView() {
 	}
 
 	@Override
@@ -25,10 +22,10 @@ public abstract class RepoBaseView extends CustomComponent implements WebView {
 	public final void enter(ViewChangeListener.ViewChangeEvent event) {
 		String str = "Navigate to " + getClass().getSimpleName();
 		String fragment = event.getParameters();
-		if (StringUtils.isNotBlank(fragment)) {
-			str += " fragment=" + fragment;
-		}
-		log.debug(str);
+//		if (StringUtils.isNotBlank(fragment)) {
+//			str += " fragment=" + fragment;
+//		}
+//		log.debug(str);
 		doNavigateTo(fragment);
 	}
 

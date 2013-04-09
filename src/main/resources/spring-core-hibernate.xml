@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			http://www.springframework.org/schema/util
+			http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<util:list id="dbEntities">
+		<value>ch.jesc.carenet.core.model.Customer</value>
+		<value>ch.jesc.vasap.core.model.Dossier</value>
+		<value>ch.jesc.carenet.core.model.User</value>
+	</util:list>
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+
+		<property name="annotatedClasses" ref="dbEntities"/>
+		<property name="hibernateProperties">
+			<bean class="net.ecozig.core.utils.MapAggregator">
+				<property name="maps">
+					<list>
+						<ref bean="baseHibernateProperties" />
+						<ref bean="specHibernateProperties" />
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<util:map id="baseHibernateProperties">
+		<entry key="hibernate.show_sql" value="false"/>
+		<entry key="hibernate.connection.autocommit" value="false"/>
+		<entry key="hibernate.jdbc.batch_size" value="0"/>
+		<entry key="hibernate.jdbc.use_streams_for_binary" value="true"/>
+		<entry key="hibernate.dialect" value-ref="hibernateDialect" />
+	</util:map>
+
+	<bean id="hibernateDialect" class="java.lang.String">
+		<constructor-arg value="org.hibernate.dialect.PostgreSQLDialect"/>
+	</bean>
+
+	<bean id="userDao" class="ch.jesc.vasap.core.dao.UserDAO" />
+	<bean id="dossierDao" class="ch.jesc.carenet.core.dao.DossierDAO" />
+
+</beans>

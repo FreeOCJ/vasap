@@ -1,10 +1,9 @@
-package ch.jesc.vasap.ui.view;
+package ch.jesc.vasap.web.ui.common;
 
-import ch.jesc.vasap.common.RepoBaseView;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 
-public abstract class BasePanelView extends RepoBaseView {
+public abstract class BasePanelView extends BaseView {
 
 	protected final Panel panel = new Panel();
 	protected final VerticalLayout layout = new VerticalLayout();

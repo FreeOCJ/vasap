@@ -1,12 +1,12 @@
-package ch.jesc.vasap.ui.view.dossier;
+package ch.jesc.vasap.web.ui.view.dossier;
 
-import ch.jesc.carenet.core.dao.DossierDAO;
-import ch.jesc.vasap.ui.view.BasePanelView;
+import ch.jesc.vasap.core.dao.DossierDAO;
+import ch.jesc.vasap.security.UserSecurity;
+import ch.jesc.vasap.web.ui.common.BasePanelView;
+import ch.jesc.vasap.web.utils.SpringHelper;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
-import net.ecozig.web.security.UserSecurity;
-import net.ecozig.web.utils.SpringHelper;
 
 
 public class DossierCreateView extends BasePanelView {

@@ -22,32 +22,24 @@
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
 
-	<!--
-	<listener>
-		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
-	</listener>
-	-->
 
-
-	<!-- webapp.root : Utile pour que le CEI arrive a déployer Adam et Facy
-			dans le meme container -->
 	<context-param>
 		<param-name>webAppRootKey</param-name>
-		<param-value>reporter.root</param-value>
+		<param-value>vasap.root</param-value>
 	</context-param>
+
 
 	<!-- Context spring -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath:spring-core-entities.xml,
 			classpath:spring-core-hibernate.xml,
 			classpath:spring-core-dao.xml,
 			classpath:spring-core-database.xml,
 			classpath:spring-core-services.xml,
 			classpath:spring-web-common.xml,
 			classpath:spring-web-database.xml,
-			/WEB-INF/spring-repo-common.xml
+			/WEB-INF/spring-vasap-ui.xml
 		</param-value>
 	</context-param>
 	<listener>
@@ -78,7 +70,7 @@
 		<init-param>
 			<description>Vaadin UI</description>
 			<param-name>UI</param-name>
-			<param-value>ch.jesc.vasap.app.RepoUI</param-value>
+			<param-value>ch.jesc.vasap.web.app.VasapUI</param-value>
 		</init-param>
 	</servlet>
 
