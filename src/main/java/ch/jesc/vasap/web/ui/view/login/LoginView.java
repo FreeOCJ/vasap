@@ -6,8 +6,10 @@ import ch.jesc.vasap.security.UserSecurity;
 import ch.jesc.vasap.web.ui.common.BasePanelView;
 import ch.jesc.vasap.web.utils.SpringHelper;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 public class LoginView extends BasePanelView {
@@ -22,8 +24,13 @@ public class LoginView extends BasePanelView {
 		layout = new VerticalLayout();
 		setCompositionRoot(layout);
 
+		final Label userLabel = new Label("User");
+		layout.addComponent(userLabel);
 		username = new TextField();
 		layout.addComponent(username);
+
+		final Label pwdLabel = new Label("Password");
+		layout.addComponent(pwdLabel);
 		password = new TextField();
 		layout.addComponent(password);
 
@@ -36,6 +43,7 @@ public class LoginView extends BasePanelView {
 				if (u != null) {
 					if (UserSecurity.login(u, password.getValue())) {
 						Notification.show("Login succesful", Notification.Type.HUMANIZED_MESSAGE);
+						UI.getCurrent().getNavigator().navigateTo("");
 					}
 					else {
 						Notification.show("Wrong password", Notification.Type.ERROR_MESSAGE);

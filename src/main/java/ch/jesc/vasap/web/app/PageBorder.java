@@ -2,26 +2,23 @@ package ch.jesc.vasap.web.app;
 
 import ch.jesc.vasap.security.UserSecurity;
 import ch.jesc.vasap.web.ui.common.WebView;
-import ch.jesc.vasap.web.ui.view.dossier.DossierCreateView;
 import ch.jesc.vasap.web.ui.view.dossier.DossierListView;
 import ch.jesc.vasap.web.ui.view.login.LoginView;
-import ch.jesc.vasap.web.utils.RequestHelper;
 import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewDisplay;
 import com.vaadin.server.Page;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.AbsoluteLayout;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
+import com.vaadin.ui.Embedded;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.Reindeer;
-
-import java.util.Date;
 
 @Theme("vasap")
 public class PageBorder extends AbsoluteLayout implements ViewDisplay {
@@ -32,10 +29,107 @@ public class PageBorder extends AbsoluteLayout implements ViewDisplay {
 		final AbsoluteLayout fullLayout = this;
 		fullLayout.setSizeFull();
 
+		final VerticalLayout headerContainer = new VerticalLayout();
+		headerContainer.setSizeFull();
+		headerContainer.setHeight("110px");
+		headerContainer.setStyleName("sf-headerLayout");
+
+		int contentPadding = 5;
+		fullLayout.addComponent(headerContainer, "top: 0px; left: " + contentPadding + " px; right: " + contentPadding + "px;");
+
+		{ // headerLayout
+
+			HorizontalLayout header = new HorizontalLayout();
+			header.setSizeFull();
+			headerContainer.addComponent(header);
+
+			Embedded vdLogo = new Embedded(null, new ThemeResource("images/logo.png"));
+			vdLogo.setSizeUndefined();
+
+			header.addComponent(vdLogo);
+			header.setComponentAlignment(vdLogo, Alignment.MIDDLE_LEFT);
+
+			{ // headerSplit
+
+				VerticalLayout headerSplit = new VerticalLayout();
+				headerSplit.setSizeFull();
+				header.addComponent(headerSplit);
+				header.setComponentAlignment(headerSplit, Alignment.MIDDLE_RIGHT);
+				header.setExpandRatio(headerSplit, 1);
+
+				HorizontalLayout appNameAndNavButtonsLayout = new HorizontalLayout();
+				appNameAndNavButtonsLayout.setSizeFull();
+
+				headerSplit.addComponent(appNameAndNavButtonsLayout);
+				headerSplit.setExpandRatio(appNameAndNavButtonsLayout, 1);
+
+				{ // appNameAndAdminSlogan
+
+					VerticalLayout appName = new VerticalLayout();
+					appNameAndNavButtonsLayout.addComponent(appName);
+					appNameAndNavButtonsLayout.setExpandRatio(appName, 1);
+
+					String appNameStr = "VaSAp";
+					Label rcpersLabel = new Label(appNameStr);
+					rcpersLabel.addStyleName("sf-header-appTitle");
+					appName.addComponent(rcpersLabel);
+
+					final Label acvLabel = new Label("Vaadin Sample Application");
+					acvLabel.addStyleName("sf-header-appSubTitle");
+					appName.addComponent(acvLabel);
+
+					{ // navigation buttons
+
+						final HorizontalLayout topRightButtonsBar = new HorizontalLayout();
+						topRightButtonsBar.setMargin(true);
+						topRightButtonsBar.setSpacing(true);
+						appNameAndNavButtonsLayout.addComponent(topRightButtonsBar);
+
+						appNameAndNavButtonsLayout.setComponentAlignment(topRightButtonsBar, Alignment.MIDDLE_RIGHT);
+
+						// Login
+						{
+							final Button accueilButton = new Button("Login");
+							accueilButton.setStyleName(Reindeer.BUTTON_SMALL);
+							topRightButtonsBar.addComponent(accueilButton);
+							topRightButtonsBar.setComponentAlignment(accueilButton, Alignment.MIDDLE_LEFT);
+							accueilButton.addClickListener(new Button.ClickListener() {
+								@Override
+								public void buttonClick(Button.ClickEvent event) {
+									UI.getCurrent().getNavigator().navigateTo(LoginView.NAME);
+								}
+							});
+						}
+
+						// Home
+						{
+							final Button portailButton = new Button("Home");
+							portailButton.setStyleName(Reindeer.BUTTON_SMALL);
+							topRightButtonsBar.addComponent(portailButton);
+							topRightButtonsBar.setComponentAlignment(portailButton, Alignment.MIDDLE_RIGHT);
+							portailButton.addClickListener(new Button.ClickListener() {
+								@Override
+								public void buttonClick(Button.ClickEvent event) {
+									UI.getCurrent().getNavigator().navigateTo(DossierListView.NAME);
+								}
+							});
+						}
+
+					} // navigation buttons
+
+				} // appNameAndAdminSlogan
+
+				// Menu
+				final VasapMenu menuBar = new VasapMenu();
+				headerSplit.addComponent(menuBar);
+
+			} // headerSplit
+		}
+		
 		// Header
 		{
 			final HorizontalLayout header = new HorizontalLayout();
-			fullLayout.addComponent(header, "top:5px; left:5px; right: 5px; height: 800px;");
+			//fullLayout.addComponent(header, "top:5px; left:5px; right: 5px; height: 800px;");
 			header.addStyleName("header-layout");
 			header.setMargin(true);
 
@@ -95,38 +189,38 @@ public class PageBorder extends AbsoluteLayout implements ViewDisplay {
 				});
 			}
 		}
-
-		// Menu du haut
-		{
-			final HorizontalLayout menuLayout = new HorizontalLayout();
-			fullLayout.addComponent(menuLayout, "top:100px; left:5px; right:5px; height: 30px;");
-			menuLayout.setStyleName("top-menu-layout");
-
-			{
-				final MenuBar menuBar = new MenuBar();
-				menuLayout.addComponent(menuBar);
-				//menuBar.setSizeFull();
-				menuBar.addItem("List", new MenuBar.Command() {
-					@Override
-					public void menuSelected(MenuBar.MenuItem selectedItem) {
-						UI.getCurrent().getNavigator().navigateTo(DossierListView.NAME);
-					}
-				});
-				menuLayout.addComponent(menuBar);
-			}
-			{
-				final MenuBar menuBar = new MenuBar();
-				menuLayout.addComponent(menuBar);
-				//menuBar.setSizeFull();
-				menuBar.addItem("Create", new MenuBar.Command() {
-					@Override
-					public void menuSelected(MenuBar.MenuItem selectedItem) {
-						UI.getCurrent().getNavigator().navigateTo(DossierCreateView.NAME);
-					}
-				});
-				menuLayout.addComponent(menuBar);
-			}
-		}
+//
+//		// Menu du haut
+//		{
+//			final HorizontalLayout menuLayout = new HorizontalLayout();
+//			fullLayout.addComponent(menuLayout, "top:100px; left:5px; right:5px; height: 30px;");
+//			menuLayout.setStyleName("top-menu-layout");
+//
+//			{
+//				final MenuBar menuBar = new MenuBar();
+//				menuLayout.addComponent(menuBar);
+//				//menuBar.setSizeFull();
+//				menuBar.addItem("List", new MenuBar.Command() {
+//					@Override
+//					public void menuSelected(MenuBar.MenuItem selectedItem) {
+//						UI.getCurrent().getNavigator().navigateTo(DossierListView.NAME);
+//					}
+//				});
+//				menuLayout.addComponent(menuBar);
+//			}
+//			{
+//				final MenuBar menuBar = new MenuBar();
+//				menuLayout.addComponent(menuBar);
+//				//menuBar.setSizeFull();
+//				menuBar.addItem("Create", new MenuBar.Command() {
+//					@Override
+//					public void menuSelected(MenuBar.MenuItem selectedItem) {
+//						UI.getCurrent().getNavigator().navigateTo(DossierCreateView.NAME);
+//					}
+//				});
+//				menuLayout.addComponent(menuBar);
+//			}
+//		}
 
 		// Partie centrale
 		{
@@ -136,38 +230,87 @@ public class PageBorder extends AbsoluteLayout implements ViewDisplay {
 			bodyLayout.setSizeFull();
 		}
 
-		// Footer
-		{
-			final HorizontalLayout footerPanel = new HorizontalLayout();
-			fullLayout.addComponent(footerPanel, "bottom: 5px; left: 5px; right: 5px; height: 30px;");
-			footerPanel.addStyleName("footer-layout");
-			//footerPanel.setHeight("30px");
+		{ // FOOTER SECTION
 
-			Label ul1 = new Label(" ");
-			footerPanel.addComponent(ul1);
-			footerPanel.setComponentAlignment(ul1, Alignment.MIDDLE_CENTER);
-			footerPanel.setExpandRatio(ul1, 3.0f);
-			ul1.setSizeFull();
+			HorizontalLayout footer = new HorizontalLayout();
+			footer.addStyleName("footerLayout");
+			footer.setSizeFull();
+			footer.setHeight("20px");
+			footer.setSpacing(true);
+			fullLayout.addComponent(footer, "bottom:5px; left:" + contentPadding + "px; right:" + contentPadding + "px;");
 
-			Label dateTime = new Label(new Date().toString());
-			footerPanel.addComponent(dateTime);
-			footerPanel.setComponentAlignment(dateTime, Alignment.MIDDLE_CENTER);
-			footerPanel.setExpandRatio(dateTime, 3.0f);
-			dateTime.setSizeUndefined();
+			{ // leftLabelsLayout
+				HorizontalLayout footerLeft = new HorizontalLayout();
+				footerLeft.setSpacing(true);
+				footer.addComponent(footerLeft);
+				footer.setExpandRatio(footerLeft, 1.0f);
 
-			Label ul2 = new Label(" ");
-			footerPanel.addComponent(ul2);
-			footerPanel.setComponentAlignment(ul2, Alignment.MIDDLE_CENTER);
-			footerPanel.setExpandRatio(ul2, 3.0f);
-			ul2.setSizeFull();
+				{ // env
+					Label environmentLbl = new Label("Env:");
+					environmentLbl.addStyleName("whiteText");
+					footerLeft.addComponent(environmentLbl);
 
-			Label language = new Label(RequestHelper.getLocale().getDisplayLanguage());
-			footerPanel.addComponent(language);
-			footerPanel.setComponentAlignment(language, Alignment.MIDDLE_RIGHT);
-			footerPanel.setExpandRatio(language, 3.0f);
-			language.setSizeFull();
+					Label environmentValue = new Label("Production");
+					footerLeft.addComponent(environmentValue);
+				} // env
 
-		}
+				{ // Version
+
+					Label snapshotLbl = new Label("Version:");
+					snapshotLbl.addStyleName("whiteText");
+					footerLeft.addComponent(snapshotLbl);
+
+					Label snapshotValue = new Label("The version 1.0");
+					footerLeft.addComponent(snapshotValue);
+
+				} // Version
+
+				{ // Build date time
+
+					Label snapshotLbl = new Label("Build:");
+					snapshotLbl.addStyleName("whiteText");
+					footerLeft.addComponent(snapshotLbl);
+
+					Label snapshotValue = new Label("Time of build");
+					footerLeft.addComponent(snapshotValue);
+
+				} // Build date time
+
+			} // leftLabelsLayout
+
+			{ // Right side
+
+				{ // User
+
+					Label userLbl = new Label("Utilisateur: ");
+					userLbl.addStyleName("whiteText");
+					footer.addComponent(userLbl);
+
+					Label userValue = new Label(UserSecurity.getPrincipal());
+					footer.addComponent(userValue);
+
+				} // User
+
+				{ // logout button
+
+					final Button logoutButton = new Button("Quitter");
+					logoutButton.setStyleName(Reindeer.BUTTON_SMALL);
+					footer.addComponent(logoutButton);
+					footer.setComponentAlignment(logoutButton, Alignment.MIDDLE_RIGHT);
+					{
+						logoutButton.addClickListener(new Button.ClickListener() {
+							@Override
+							public void buttonClick(Button.ClickEvent event) {
+								//RcpersUI.getRcpersUI().logout();
+							}
+						});
+					}
+
+				} // logout
+
+			} // Right side
+
+		} // FOOTER SECTION
 	}
 
 	@Override

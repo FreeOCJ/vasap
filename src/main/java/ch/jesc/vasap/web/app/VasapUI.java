@@ -40,24 +40,7 @@ public class VasapUI extends UI {
 		});
 
 		addViews(navigator);
-
-//		// React to fragment changes
-//		getPage().addUriFragmentChangedListener(new Page.UriFragmentChangedListener() {
-//			@Override
-//			public void uriFragmentChanged(Page.UriFragmentChangedEvent event) {
-//				handleFragment(event.getUriFragment());
-//			}
-//		});
-//
-//		handleFragment(request.getContextPath());
 	}
-
-//	private void handleFragment(String fragment) {
-//		Page.getCurrent().setUriFragment(fragment);
-//
-//		// react to initial fragment, received before we created the Navigator
-//		navigator.navigateTo(fragment);
-//	}
 
 	protected void addViews(Navigator navigator) {
 		// Vue par défaut

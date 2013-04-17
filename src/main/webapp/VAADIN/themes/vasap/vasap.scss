@@ -3,111 +3,342 @@
 @mixin vasap {
 	@include chameleon;
 
-	div {
-		font-size: 16px;
-	}
+  $maleColor: #7778d9;
+  $femaleColor: #d9d;
+  $borderColor: #DADADA;
+  $bannerColor: #AFB7D5;
+
+/* Message Merci de patienter au centre de l'écran*/
+.v-loading-indicator,
+.v-loading-indicator-delay {
+    display:none;
+}
+
+.v-loading-indicator,
+.v-loading-indicator-delay,
+.v-loading-indicator-wait
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 99%;
+    height: 99%;
+    z-index: 30000;
+
+    background-repeat: no-repeat;
+    background-position : center center;
+    margin: 0;
+    padding: 0;
+}
+/* Hack permettant de ne pas afficher l'indicator trop tot on ne peut pas changer le temps, mais il
+y a 3 niveaux d'images :
+- Blanc
+- Jaune (delay)
+- Rouge (wait)
+Dans ce cas, on affichge pas d'image pour le niveau blanc.
+Les couleurs correspondent au loading-indicator par défaut de vaadin, qui tourne en haut à droite de l'écran.
+*/
+.v-loading-indicator {
+    display : none;
+    background-image: none;
+}
+
+.v-loading-indicator-delay,
+.v-loading-indicator-wait {
+         background-color: rgba(0,0,0,0.1);
+         background-image: url(images/merciDePatienter.gif);
+}
+
+.rcpers-body-default-padding {
+    padding-left:   20px;
+    padding-top:    20px;
+}
 
 
-	.login-label {
-		font-size: 20px;
-		font-color: orange;
-		margin: 5px;
-	}
-	.title-label {
-		font-size: 30px;
-		font-family: Georgia;
-		color: #339933;
-		text-align: left;
-		padding-top: 30px;
-		padding-left: 100px;
-	}
+/* START HEADER FOOTER */
 
-	.header-layout {
-		background-color: #CCFFCC;
-		width: 100%;
-	}
-
-	.left-menu {
-		vertical-align: top;
-		//background-color: rgba(3, 255, 164, 0.20);
-	}
-
-	.middle-layout {
-		vertical-align: top;
-		background-color: #CCFFCC;
-	}
-
-	.body-layout {
-		padding: 2px;
-		//margin: 5px;
-		border: 1px solid orange;
-		-webkit-border-radius: 10px;
-		-moz-border-radius: 10px;
-		border-radius: 10px;
-	}
-
-	.body-view {
-		border: none;
-		//border-color: white;
-	}
+/* Background blanc du header */
+.sf-headerLayout {
+	background: white url("images/background.png") repeat-y 100% 100px;
+}
 
 
-	.v-panel-content-body-view {
-		border: none;
-		//border-color: white;
-	}
+.searchBar {
+    padding-left: 10px;
+    padding-right: 5px;
+    background-image:url("images/bannerRepeatingBackground.png");
+    background-repeat:repeat-x 100%;
+}
 
-	.v-panel-nocaption-body-view {
-		border: none;
-		//border-color: white;
-	}
-
-	.v-gecko .v-panel-deco {
-		border: none;
-		border-top-color: white;
-		background: none;
-	}
-
-	.v-webkit .v-panel-deco {
-		border: none;
-		border-top-color: white;
-		background: none;
-	}
-
-
-	.v-ie9 .v-panel-deco {
-		border: none;
-		border-top-color: white;
-		background: none;
-	}
-
-	.footer-layout {
-		background-color: #D9FAF7;
-	}
-
-	.view-title {
-		font-size: 20px;
-		//font-color: orange;
-	}
-
-	.rented-device {
-		border: 1px solid;
-		border-color: orange;
-		padding: 10px;
-		margin: 10px;
-	}
-
-	.v-menubar {
-		border: 1px solid;
-		background: none;
-		background-color: white;
-		color: orange;
-	}
-
-	.dossier-block {
-		border: 1px solid;
-		background-color: blue;
-
-	}
+/* Polices du header */
+.sf-header-appTitle {
+   font-size: 16pt;
+   color: #007200;
+   padding-bottom: 10pt;
+   position: relative;
+   top: 2mm;
 
 }
+
+/* Footer background */
+.footerLayout {
+    background-color: $bannerColor;
+}
+
+/* Footer text blanc */
+.whiteText {
+    color: white;
+}
+
+/* "Administration cantonale vaudoise" du header*/
+.sf-header-appSubTitle {
+   font-size: 8pt;
+   color: rgb(84, 75, 127);
+}
+
+/* END HEADER FOOTER */
+
+/* START HEADER MENU */
+
+/* Menu avec les boutons Personne - Evenement - etc*/
+.sf-header-menu {
+	background: none;
+}
+
+/* MenuItem */
+.sf-header-menu .v-menubar-menuitem {
+    color: #007200;
+	font-size:10pt;
+	text-shadow: none;
+}
+
+/* MenuItem hover */
+.sf-header-menu .v-menubar-menuitem:hover {
+	background-color: #8C9CCA;
+}
+
+/* Menubar : Background */
+div.v-menubar-submenu.v-menubar-submenu-sf-header-menu.v-menubar-submenu {
+	background: white;
+	border: 1px solid rgb(22, 103, 52);
+}
+
+/* END MENU HEADER */
+
+/* LiteCartouche cancelée => Affichée en noir pâle */
+.cancelled {
+    background-color: #cccdcf!Important;
+}
+
+/* LiteCartouche sélectionnée => Affichée en jaune pâle */
+.selected {
+    background-color: #fdfedc!important;
+}
+/* LiteCartouche avec background odd*/
+.v-table-row-odd .liteCartouche {
+	background-color: #ecf3fe;
+}
+
+.background {
+    background-color: white;
+}
+
+/* Table des résultat avec un background blanc */
+.v-table-foundPersonsTable .v-table-row-odd {
+    background-color: white;
+}
+
+/* Couleurs pour les sexes */
+.E2_feminin{
+    border-left-color: $femaleColor;
+}
+.E1_masculin{
+    border-left-color: $maleColor;
+}
+.E0_undefined{
+    border-left-color: gray;
+}
+
+
+/* LiteCartouche : Affichage de l'adresse */
+.addressGroup {
+	color: #4744b3;
+	font: 11px;
+}
+
+
+
+
+/* LiteCartouche : NAVS 13 en gris */
+.navs13 {
+	text-align: center;
+	color: gray;
+	font: 11px;
+}
+
+/* AdresseTab : Municipalité */
+.v-caption-municipality_caption {
+ 	font-size: 14px;
+    font-weight: bold;
+}
+
+/* Nom de famille en gras */
+.familyNames {
+	font-weight: bold;
+	font-size: 13px;
+	margin-right: 5px;
+}
+
+/* Cartouche : Picto gender */
+.gender_border_male, .gender_border_female {
+    border-width: 1px;
+    border-color:gray;
+    border-style: solid;
+    border-left-width: 5px;
+}
+
+/* Cartouche text LPRD en rouge */
+.v-caption-lprd-red {
+    color : red;
+    font-weight: bold;
+}
+
+.agePlacement {
+    position: relative;
+    bottom: 25px;
+    left: -1px;
+}
+
+/* Cartouche : Couleur pour le sexe */
+.gender_border_male {
+    border-left-color: $maleColor;
+}
+.gender_border_female {
+    border-left-color: $femaleColor;
+}
+
+/* Bordure des panels */
+.sd-panel {
+	font-size: 12px;
+	border: 1px solid $borderColor;
+}
+
+/* Couleur des Key => "Nom:"*/
+.sd-key-label {
+	color: #3540B5;
+}
+/* Taille du texte dans le persondetails */
+.smallText {
+    font-size: 10px;
+}
+
+/* Dans les dénénagement, affichage d'une ligne horizontale */
+.sdr-moveIn-panel {
+    border-top: 1px solid #D7E1EC;
+}
+
+/* Adresse : Affichage d'une bordure autour d'une arrivée */
+.border-lite {
+    border-style:solid;
+    border-width:2px;
+    border-color: $borderColor;
+}
+
+/*ShowHistoryLayout : Background */
+.box-background {
+    background-color: #dfe5f0;
+    color: LightSlateGray;
+    font-weight:bold;
+}
+
+/*ShowHistoryLayout : Padding a gauche à côté de l'icone */
+.box-padding {
+    padding-left: 4px;
+    padding-top: 2px;
+}
+
+
+/* Affiche la valeur (age, sexe) avec une couleur par sexe dans une boite carrée */
+.box_female,.box_male, .box_unkown{
+	margin: 1px;
+	padding-right: 3px;
+	padding-left: 3px;
+
+	color: white;
+	font-weight: bold;
+	height: 18px !important;
+
+}
+
+.box_male {
+	background-color: $maleColor;
+}
+
+.box_female {
+	background-color: $femaleColor;
+}
+
+/* Affiche un lien souligné pour le nom du tab */
+/* A VOIR SI ON GARDE CAR C'EST MOCHE*/
+.v-tabsheet-tabitemcell .v-caption .v-captiontext  {
+		text-decoration: underline;
+}
+
+/* Tri : Affichage en gras du tri sélectionné */
+.v-button-bigger .v-button-caption {
+    font-weight: bold;
+}
+
+.v-caption-bold {
+    font-weight: bold;
+}
+
+.v-label-small {
+    font-size: 10px;
+}
+
+.v-caption-small {
+    font-size: 10px;
+}
+
+.v-checkbox-male > label {
+    color: white;
+    font-weight: bold;
+    background-color: $maleColor;
+}
+.v-checkbox-female > label {
+    color: white;
+    font-weight: bold;
+    background-color: $femaleColor;
+}
+/* Affiche un Label comme un lien, souligné et bleu. Utilise pour le tooltip de destination/provenance dans adresse tab*/
+.v-label-as-a-link {
+    text-decoration: underline;
+    color: #1b699f;
+}
+/* Permet d'afficher une ligne rouge dans un tableau Vaadin */
+.v-table-cell-content-red {
+	background: red;
+}
+
+/* Evite de mettre les header des table en majuscule */
+.v-table-header{ text-transform: none !important }
+}
+
+/*
+    START permet d'afficher l'icone à droite du caption sur
+    - link
+    - label
+    - button
+*/
+.v-caption-icon-after-caption {
+    direction: rtl;
+}
+/* Add some padding around the icon. */
+.v-caption-icon-after-caption .v-icon {
+    padding: 0 3px;
+}
+/*
+   END permet d'afficher l'icone à droite du caption
+*/
+
