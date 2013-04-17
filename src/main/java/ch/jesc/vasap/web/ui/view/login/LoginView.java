@@ -5,6 +5,7 @@ import ch.jesc.vasap.core.model.User;
 import ch.jesc.vasap.security.UserSecurity;
 import ch.jesc.vasap.web.ui.common.BasePanelView;
 import ch.jesc.vasap.web.utils.SpringHelper;
+import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
@@ -54,6 +55,10 @@ public class LoginView extends BasePanelView {
 				}
 			}
 		});
+
+		Label explaination = new Label("You can login either as:<p>admin@master.com for admin rights or as<p>bla@bli.com for a standard John Doe account<p>Password is <i>hello</i> in either case");
+		explaination.setContentMode(ContentMode.HTML);
+		layout.addComponent(explaination);
 	}
 
 	@Override
