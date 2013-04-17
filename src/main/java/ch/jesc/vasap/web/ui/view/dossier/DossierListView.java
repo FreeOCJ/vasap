@@ -5,8 +5,10 @@ import ch.jesc.vasap.core.model.Dossier;
 import ch.jesc.vasap.security.UserSecurity;
 import ch.jesc.vasap.web.ui.common.BasePanelView;
 import ch.jesc.vasap.web.utils.SpringHelper;
+import com.vaadin.server.ExternalResource;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Link;
 
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class DossierListView extends BasePanelView {
 				final HorizontalLayout block = new HorizontalLayout();
 				layout.addComponent(block);
 				block.setStyleName("dossier-block");
-				block.addComponent(new Label(d.getFrom().toString()));
+				block.addComponent(new Link(d.getFrom().toString(), new ExternalResource("#!dossierDetails/id="+d.getId())));
 				block.addComponent(new Label(d.getCustomer()));
 				block.addComponent(new Label(d.getDescription()));
 			}

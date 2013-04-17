@@ -3,6 +3,7 @@ package ch.jesc.vasap.web.app;
 import ch.jesc.vasap.web.ui.common.WebView;
 import ch.jesc.vasap.web.ui.view.AccessDeniedView;
 import ch.jesc.vasap.web.ui.view.dossier.DossierCreateView;
+import ch.jesc.vasap.web.ui.view.dossier.DossierDetailsView;
 import ch.jesc.vasap.web.ui.view.dossier.DossierListView;
 import ch.jesc.vasap.web.ui.view.login.LoginView;
 import com.vaadin.annotations.Theme;
@@ -46,8 +47,12 @@ public class VasapUI extends UI {
 		// Vue par défaut
 		addView("", DossierListView.class);
 
+		// Dossier
 		addView(DossierListView.NAME, DossierListView.class);
+		addView(DossierDetailsView.NAME, DossierDetailsView.class);
 		addView(DossierCreateView.NAME, DossierCreateView.class);
+
+		// Technical pages
 		addView(LoginView.NAME, LoginView.class);
 		addView(AccessDeniedView.NAME, AccessDeniedView.class);
 	}

@@ -7,7 +7,6 @@ import ch.jesc.vasap.web.ui.view.login.LoginView;
 import com.vaadin.annotations.Theme;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewDisplay;
-import com.vaadin.server.Page;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.AbsoluteLayout;
 import com.vaadin.ui.Alignment;
@@ -323,8 +322,6 @@ public class PageBorder extends AbsoluteLayout implements ViewDisplay {
 
 		viewComponent.setSizeFull();
 		viewComponent.setStyleName("body-view");
-
-		Page.getCurrent().setTitle("VaSAp - " + webView.getTitle());
 	}
 
 

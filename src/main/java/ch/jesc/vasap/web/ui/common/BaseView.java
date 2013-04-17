@@ -2,6 +2,7 @@ package ch.jesc.vasap.web.ui.common;
 
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.Page;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.UI;
 import org.apache.log4j.Logger;
@@ -22,6 +23,8 @@ public abstract class BaseView extends CustomComponent implements WebView {
 //		}
 //		log.debug(str);
 		doNavigateTo(fragment);
+
+		Page.getCurrent().setTitle("VaSAp - " + getTitle());
 	}
 
 	protected abstract void doNavigateTo(String fragmentParameters);
